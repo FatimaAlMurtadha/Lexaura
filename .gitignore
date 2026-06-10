@@ -1,12 +1,50 @@
-.vscode
-.idea
-__pycache__
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-ENV/
-venv.bak/
-/ai-service/.venv
+# -------------------------
+# Global ignores
+# -------------------------
+.DS_Store
+Thumbs.db
+*.log
+*.env
+.env.*
+*.sqlite
+*.db
+
+# -------------------------
+# Node / Next.js (frontend)
+# -------------------------
+frontend/node_modules/
+frontend/.next/
+frontend/.turbo/
+frontend/.vercel/
+frontend/.env.local
+
+# -------------------------
+# Python / uv (ai-service)
+# -------------------------
+ai-service/.venv/
+ai-service/__pycache__/
+ai-service/*.pyc
+ai-service/.pytest_cache/
+ai-service/.ruff_cache/
+
+# -------------------------
+# Go (backend)
+# -------------------------
+backend/bin/
+backend/vendor/
+backend/*.exe
+backend/*.test
+backend/*.out
+
+# -------------------------
+# Editor / IDE
+# -------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# -------------------------
+# Docker
+# -------------------------
+docker-data/
