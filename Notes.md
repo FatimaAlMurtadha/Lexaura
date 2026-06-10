@@ -15,3 +15,11 @@ cd frontend
 
 npx create-next-app@latest . --typescript
 
+-----------------------------
+# backend
+mkdir backend
+
+mkdir backend/cmd backend/internal backend/internal/handlers backend/internal/services backend/internal/repositories backend/internal/models backend/internal/middleware backend/internal/sessions backend/internal/acl backend/internal/ai backend/pkg
+
+go mod init github.com/FatimaAlMurtadha/Lexaura/backend
+
