@@ -1,0 +1,51 @@
+# Docker Compose configuration for the Lexaura stack.
+# Services: backend, ai, frontend, and chroma.
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lex_backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ai
+      - chroma
+    environment:
+      PORT: "8000"
+      AI_SERVICE_URL: "http://ai:8001"
+
+  ai:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: lex_ai
+    ports:
+      - "8001:8001"
+    depends_on:
+      - chroma
+    volumes:
+      - ./docker/chroma:/app/chroma
+    environment:
+      CHROMA_DB_PATH: "/app/chroma"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: lex_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: "http://backend:8000"
+
+  chroma:
+    image: chromadb/chroma
+    container_name: lex_chroma
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./docker/chroma:/chroma
