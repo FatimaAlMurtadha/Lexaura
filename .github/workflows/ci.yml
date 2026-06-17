@@ -55,12 +55,13 @@ jobs:
         run: uv sync --frozen
 
       - name: Run tests if any exist
-        if: ${{ hashFiles('ai-service/**/test_*.py', 'ai-service/**/*_test.py') != '' }}
-        run: uv run pytest
-
-      - name: Skip pytest when no tests exist
-        if: ${{ hashFiles('ai-service/**/test_*.py', 'ai-service/**/*_test.py') == '' }}
-        run: echo "No Python tests found; skipping pytest."
+        run: |
+          if [ -n "$(find . -type f \( -name 'test_*.py' -o -name '*_test.py' \) -print -quit 2>/dev/null)" ]; then
+            echo "Running pytest because test files were found."
+            uv run pytest
+          else
+            echo "No Python tests found; skipping pytest."
+          fi
 
   frontend:
     runs-on: ubuntu-latest
