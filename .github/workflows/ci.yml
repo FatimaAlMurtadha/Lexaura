@@ -56,12 +56,26 @@ jobs:
 
       - name: Run tests if any exist
         run: |
-          if [ -n "$(find . -type f \( -name 'test_*.py' -o -name '*_test.py' \) -print -quit 2>/dev/null)" ]; then
-            echo "Running pytest because test files were found."
-            uv run pytest
-          else
-            echo "No Python tests found; skipping pytest."
-          fi
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+
+          root = Path('.')
+          excluded = {'.git', '.venv', '__pycache__'}
+          test_files = []
+
+          for path in root.rglob('*.py'):
+              if any(part in excluded for part in path.parts):
+                  continue
+              if path.name.startswith('test_') or path.name.endswith('_test.py'):
+                  test_files.append(str(path))
+
+          if test_files:
+              print(f"Found Python test files: {test_files}")
+              subprocess.run(['uv', 'run', 'pytest'], check=True)
+          else:
+              print('No Python tests found; skipping pytest.')
+          PY
 
   frontend:
     runs-on: ubuntu-latest
