@@ -55,17 +55,18 @@ jobs:
         run: uv sync --frozen
 
       - name: Check for Python tests
+        id: detect-tests
         run: |
           if [ -n "$(find . -type f \( -name 'test_*.py' -o -name '*_test.py' \) -print -quit)" ]; then
             echo "Python tests found."
-            echo "RUN_PYTEST=true" >> "$GITHUB_ENV"
+            echo "run_pytest=true" >> "$GITHUB_OUTPUT"
           else
             echo "No Python tests found; skipping pytest."
-            echo "RUN_PYTEST=false" >> "$GITHUB_ENV"
+            echo "run_pytest=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run tests if any exist
-        if: env.RUN_PYTEST == 'true'
+        if: steps.detect-tests.outputs.run_pytest == 'true'
         run: uv run pytest
 
   frontend:
