@@ -1,13 +1,17 @@
-# This file is used to build the backend server using a multi-stage Docker build. 
-# The first stage uses the official Golang image to compile the server, and the second stage uses a minimal base image to run the compiled server.
-FROM golang:1.22 AS builder
+# Backend Dockerfile
+# Builds the Go service and runs the compiled binary.
+
+FROM golang:1.26 AS builder
 
 WORKDIR /app
-COPY . .
+COPY go.mod ./
 RUN go mod download
-RUN go build -o server ./cmd/server
 
-FROM gcr.io/distroless/base
+COPY . .
+RUN go build -o /app/backend ./server
+
+FROM gcr.io/distroless/base-debian12
 WORKDIR /app
-COPY --from=builder /app/server .
-CMD ["./server"]
+COPY --from=builder /app/backend /app/backend
+EXPOSE 8000
+CMD ["/app/backend"]
