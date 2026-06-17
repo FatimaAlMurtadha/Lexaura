@@ -23,3 +23,11 @@ mkdir backend/cmd backend/internal backend/internal/handlers backend/internal/se
 
 go mod init github.com/FatimaAlMurtadha/Lexaura/backend
 
+----------------------------------------------------
+# plan 1
+1. Implement /ingest in AI-Service  // pipeline
+2. Implement /upload in Backend  
+3. Build frontend upload UI  
+4. Integrate all components  
+5. Add RAG search  
+6. Add chat endpoint  
