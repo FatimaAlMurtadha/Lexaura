@@ -193,11 +193,11 @@ Lexaura/
 
  7. Acceptance Criteria
 
-✔️ Student can upload a PDF  
-✔️ Backend validates and forwards file  
-✔️ AI-service extracts text  
-✔️ Embeddings stored in ChromaDB  
-✔️ Backend returns success  
-✔️ Frontend shows success message  
-✔️ No errors in logs  
-✔️ CI pipeline passes
+- Student can upload a PDF  
+- Backend validates and forwards file  
+- AI-service extracts text  
+- Embeddings stored in ChromaDB  
+- Backend returns success  
+- Frontend shows success message  
+- No errors in logs  
+- CI pipeline passes

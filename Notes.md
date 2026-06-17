@@ -23,6 +23,11 @@ mkdir backend/cmd backend/internal backend/internal/handlers backend/internal/se
 
 go mod init github.com/FatimaAlMurtadha/Lexaura/backend
 
+----------------------------------------------------------
+# ai-service
+cd ai-service
+uv run uvicorn scr.api.main:app --reload
+
 ----------------------------------------------------
 # plan 1
 1. Implement /ingest in AI-Service  // pipeline
