@@ -28,7 +28,11 @@ go mod init github.com/FatimaAlMurtadha/Lexaura/backend
 cd ai-service
 uv run uvicorn src.main:app --reload
 
+uv pip install sentence-transformers
+
+
 //
+
 - src/infrastructure/storage/pdf.py : pdf extraction + file handling + any file or storage logic (io infrastructure) - NOT a business logic.
 
 - src/infrastructure/vectorstore/ chromaDB client to create collections + add embeddings + search (similarity search) LIKE client.py + collection.py + store.py // (VECTOR DATABASE).
@@ -58,9 +62,14 @@ uv run uvicorn src.main:app --reload
 6. Add chat endpoint  
 
 
-// MY STOR:
+// MY STORY:
 
 - (ingest) The Secretary "system: FASTAPI" -> receive files -> check -> if pdf -> well(async) wait(await) -> open the file and convert it to a flexible book inside the computer using (io.BytesIO) -> hand it to the expert.
+
 - (func extract_text_from_pdf) The Expert: read the book -> handed the book as a text to the secretary again
+
+- (Chunk) The scissors -> every pace size: 800 char -> overlap: 100
+
 - The secretary print 500 char out of the received text -> handed a receipt to the customer (status, message, text_preview)
-- (Chunk) The scissors -> ever pace size: 800 char -> overlap: 100
+
+- (embeddingModel) The Encrypter : used to convert the human text to (emotions + ideas) that the computer understand. Translate chunks to vectors(embeddings). every chunk turns into 384 vectors  
