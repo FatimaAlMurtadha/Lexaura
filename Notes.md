@@ -72,4 +72,6 @@ uv pip install sentence-transformers
 
 - The secretary print 500 char out of the received text -> handed a receipt to the customer (status, message, text_preview)
 
-- (embeddingModel) The Encrypter : used to convert the human text to (emotions + ideas) that the computer understand. Translate chunks to vectors(embeddings). every chunk turns into 384 vectors  
+- (embeddingModel) The Encrypter : used to convert the human text to (emotions + ideas) that the computer understand. Translate chunks to vectors(embeddings). every chunk turns into 384 vectors
+
+- vectorstore (client.py + store.py) The Librarian on the library ChromaDB // start with character Victor Warehouse (VectorStore)
