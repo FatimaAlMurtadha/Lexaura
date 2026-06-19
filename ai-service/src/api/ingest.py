@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, HTTPException
 from src.infrastructure.storage.pdf import extract_text_from_pdf
 from src.core.chunking import chunk_text
+from src.infrastructure.embeddings.embedder import EmbeddingModel
 
 import io
 
@@ -24,9 +25,15 @@ async def ingest_pdf(file: UploadFile):
     print("===== First chunk preview ===")
     print(chunks[0][:300])
 
+    embeddings = EmbeddingModel.embed(chunks) # translate the chunks into vectors (embeddings)
+    print("===== Number of shape: ")
+    print(len(embeddings), "vectors")
+    print("Vector size: ", len(embeddings[0]))
+
     return {"status":"ok",
-            "message": "PDF processed( text extracted + chunked)",
+            "message": "PDF processed( text extracted + chunked -> embeddings generated)",
             "chunks_count": len(chunks),
-            "first_chunk_preview": chunks[0][:200]
+            "first_chunk_preview": chunks[0][:200],
+            "embedding_dim": len(embeddings[0])
             }
 
