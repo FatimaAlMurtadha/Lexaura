@@ -1,6 +1,6 @@
 from pypdf import PdfReader
 
-# pdf -> text -> chunks -> embeddings -> chromaDB
+# pdf -> text -> chunks -> embeddings -> chromaDB -> query -> retrieve -> LLM -> answer
 # 1. pdf -> text
 
 def extract_text_from_pdf(file_obj) -> str:

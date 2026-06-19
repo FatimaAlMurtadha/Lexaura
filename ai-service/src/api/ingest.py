@@ -1,5 +1,6 @@
 from fastapi import APIRouter, UploadFile, HTTPException
 from src.infrastructure.storage.pdf import extract_text_from_pdf
+from src.core.chunking import chunk_text
 
 import io
 
@@ -17,7 +18,15 @@ async def ingest_pdf(file: UploadFile):
     print("============ Extracted Text ==================")
     print(text[:500]) # show first 500 letters on the text
 
+    chunks = chunk_text(text)
+
+    print("===== Number of chunks: ", len(chunks))
+    print("===== First chunk preview ===")
+    print(chunks[0][:300])
+
     return {"status":"ok",
-            "message": "PDF processed( text extracted)",
-            "text_preview": text[:200]
+            "message": "PDF processed( text extracted + chunked)",
+            "chunks_count": len(chunks),
+            "first_chunk_preview": chunks[0][:200]
             }
+
