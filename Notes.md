@@ -64,14 +64,20 @@ uv pip install sentence-transformers
 
 // MY STORY:
 
-- (ingest) The Secretary "system: FASTAPI" -> receive files -> check -> if pdf -> well(async) wait(await) -> open the file and convert it to a flexible book inside the computer using (io.BytesIO) -> hand it to the expert.
+- 1- (ingest) The Secretary "system: FASTAPI" -> receive files -> check -> if pdf -> well(async) wait(await) -> open the file and convert it to a flexible book inside the computer using (io.BytesIO) -> hand it to the expert.
 
-- (func extract_text_from_pdf) The Expert: read the book -> handed the book as a text to the secretary again
+- 2- (func extract_text_from_pdf) The Expert: read the book -> handed the book as a text to the secretary again
 
-- (Chunk) The scissors -> every pace size: 800 char -> overlap: 100
+- 3- (Chunk) The scissors -> every pace size: 800 char -> overlap: 100
 
-- The secretary print 500 char out of the received text -> handed a receipt to the customer (status, message, text_preview)
+- 4- The secretary print 500 char out of the received text -> handed a receipt to the customer (status, message, text_preview)
 
-- (embeddingModel) The Encrypter : used to convert the human text to (emotions + ideas) that the computer understand. Translate chunks to vectors(embeddings). every chunk turns into 384 vectors
+- 5- (embeddingModel) The Encrypter : used to convert the human text to (emotions + ideas) that the computer understand. Translate chunks to vectors(embeddings). every chunk turns into 384 vectors
 
-- vectorstore (client.py + store.py) The Librarian on the library ChromaDB // start with character Victor Warehouse (VectorStore)
+- 6- vectorstore (client.py + store.py) The Librarian on the library ChromaDB // start with character Victor Warehouse (VectorStore)
+
+### RAG Retrieval API Lexaura : 
+
+- feature/rag/schemas.py: request / response ---- server.py: RAG Logic: embedding -> search 
+- LLM: infrastructure/llm/ollama_clint.py: 
+- API endpoint: api/rag.py : query
