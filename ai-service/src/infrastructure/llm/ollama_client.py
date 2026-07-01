@@ -1,5 +1,19 @@
 import requests
 
+# I can control the LLMs configurations here: Max Tokens, Top-K , Top-P and Temperature
+# Such as:
+# payload = {
+# "model": "llama3b",
+# "prompt": prompt,
+# "stream": False,
+# "options": {
+#     "temperature": 0.2,
+#     "top_k": 40,
+#     "top_p": 0.9,
+#     "num_predict": 512
+#  }
+#}
+
 # This function sends a prompt to the Ollama API and returns the generated answer.
 def generate_answer(prompt: str) -> str:
     url = "http://localhost:11434/api/generate" # Ollama API endpoint
