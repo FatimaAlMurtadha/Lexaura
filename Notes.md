@@ -23,6 +23,9 @@ mkdir backend/cmd backend/internal backend/internal/handlers backend/internal/se
 
 go mod init github.com/FatimaAlMurtadha/Lexaura/backend
 
+cd backend
+go run server/main.go
+
 ----------------------------------------------------------
 # ai-service
 cd ai-service

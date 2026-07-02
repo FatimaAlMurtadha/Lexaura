@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/FatimaAlMurtadha/Lexaura/backend/internal/api"
 )
 
 func main() {
@@ -12,14 +14,21 @@ func main() {
 		port = "8000"
 	}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	mux := http.NewServeMux()
+
+	// Health check
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write([]byte(`{"message":"Backend is running!"}`))
+		w.Write([]byte(`{"message":"Backend is running!"}`))
 	})
+
+	// Register all API routes
+	api.RegisterRoutes(mux)
 
 	addr := ":" + port
 	log.Printf("Backend server listening on %s", addr)
-	if err := http.ListenAndServe(addr, nil); err != nil {
+
+	if err := http.ListenAndServe(addr, mux); err != nil {
 		log.Fatal(err)
 	}
 }
