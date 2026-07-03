@@ -1,10 +1,13 @@
 package clients
 
 import (
-    "bytes"
-    "io"
-    "mime/multipart"
-    "net/http"
+	"bytes"
+	"fmt"
+	"io"
+	"mime/multipart"
+	"net/http"
+	"strings"
+    "github.com/FatimaAlMurtadha/Lexaura/backend/internal/shared/clients"
 )
 
 func SendToAIService(file io.Reader, filename string) (string, error) {
@@ -35,4 +38,27 @@ func SendToAIService(file io.Reader, filename string) (string, error) {
 
     respBody, _ := io.ReadAll(resp.Body)
     return string(respBody), nil
+}
+
+func SendQueryToAIService(question string) (string, error){
+    payload := strings.NewReader(fmt.Sprintf(`{"question":"%s"}`, question))
+
+    req , err := http.NewRequest("POST", "http://localhost:8000/api/query", payload)
+
+    if err != nil {
+        return "", err
+    }
+
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        return "", err
+    }
+    defer resp.Body.Close()
+
+    respBody, _ := io.ReadAll(resp.Body)
+    return string(respBody), nil
+
 }

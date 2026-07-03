@@ -8,5 +8,5 @@ import (
 
 func RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/upload", handlers.UploadPDF)
-
+	mux.HandleFunc("/query", handlers.QueryDocument)
 }
