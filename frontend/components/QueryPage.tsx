@@ -15,7 +15,7 @@ export default function QueryPage() {
 
   return (
     <div >
-      <h1>Ask a Question</h1>
+      <h2>Ask a Question</h2>
 
       <form onSubmit={handleAsk}>
         <input
