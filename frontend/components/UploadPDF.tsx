@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { uploadPDF } from "@/lib/api";
 
-export default function UploadPage() {
+export default function UploadPDF() {
   const [result, setResult] = useState("");
 
   async function handleUpload(e: React.FormEvent<HTMLFormElement>) {
@@ -17,8 +17,8 @@ export default function UploadPage() {
   }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Upload PDF</h1>
+    <div>
+      <h2>Upload PDF</h2>
 
       <form onSubmit={handleUpload}>
         <input type="file" name="file" />
@@ -26,7 +26,7 @@ export default function UploadPage() {
       </form>
 
       {result && (
-        <pre style={{ marginTop: "20px", background: "#eee", padding: "10px" }}>
+        <pre>
           {result}
         </pre>
       )}

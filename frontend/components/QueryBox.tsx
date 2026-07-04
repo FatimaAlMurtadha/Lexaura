@@ -14,7 +14,7 @@ export default function QueryPage() {
   }
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div >
       <h1>Ask a Question</h1>
 
       <form onSubmit={handleAsk}>
@@ -28,7 +28,7 @@ export default function QueryPage() {
       </form>
 
       {answer && (
-        <pre style={{ marginTop: "20px", background: "#eee", padding: "10px" }}>
+        <pre>
           {answer}
         </pre>
       )}
