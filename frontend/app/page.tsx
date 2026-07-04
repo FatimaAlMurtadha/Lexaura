@@ -17,7 +17,7 @@ export default function Home() {
 
           {!showUpload && (
             <button onClick={() => setShowUpload(true)}
-            className="upload-button">
+            className="home-upload-btn">
               Would you like to upload a PDF file?
             </button>
           )}
