@@ -14,21 +14,24 @@ export default function QueryPage() {
   }
 
   return (
-    <div >
-      <h2>Ask a Question</h2>
+    <div className="query-box">
+      <h2 className="query-title">Ask a Question</h2>
 
-      <form onSubmit={handleAsk}>
+      <form onSubmit={handleAsk} className="query-form">
         <input
           type="text"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Enter your question..."
+          className="query-input"
         />
-        <button type="submit">Ask</button>
+        <button type="submit" className="query-btn">
+          Ask
+        </button>
       </form>
 
       {answer && (
-        <pre>
+        <pre className="query-result">
           {answer}
         </pre>
       )}

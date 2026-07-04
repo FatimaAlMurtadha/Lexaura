@@ -10,21 +10,26 @@ export default function Home() {
 
   return (
     <div>
-      <main>
-        <h1>LEXAURA</h1>
-        <p>Welcome to LEXAURA! Your AI-powered student assistant.</p>
-        {!showUpload && (
-          <button onClick={() => setShowUpload(true)}>
-            Would you like to upload a PDF file?
-          </button>
-        )}
+      <main className="home-container">
+        <div className="home-header">
+          <h1 className="home-title">LEXAURA</h1>
+          <p className="home-description">Welcome to LEXAURA! Your AI-powered student assistant.</p>
+
+          {!showUpload && (
+            <button onClick={() => setShowUpload(true)}
+            className="upload-button">
+              Would you like to upload a PDF file?
+            </button>
+          )}
+        </div>
+
         {showUpload && (
-          <div>
+          <div className="upload-section">
             <UploadPDF onUploaded={() => setShowQuery(true)} />
           </div>
         )}
         {showQuery && (
-          <div>
+          <div className="query-section">
             <QueryPage />
           </div>
         )}

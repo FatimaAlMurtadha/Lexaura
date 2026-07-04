@@ -22,15 +22,18 @@ export default function UploadPDF({ onUploaded }: UploadPDFProps) {
   }
 
   return (
-    <div>
-      <h2>Upload PDF</h2>
+    <div className="upload-box">
+      <h2 className="upload-title">Upload PDF</h2>
 
-      <form onSubmit={handleUpload}>
-        <input type="file" name="file" />
-        <button type="submit">Upload</button>
+      <form onSubmit={handleUpload} className="upload-form">
+        <input type="file" name="file" className="upload-input" />
+        <button type="submit" className="upload-btn">
+          Upload
+        </button>
       </form>
 
-      {result && <pre>{result}</pre>}
+      {result &&
+        <pre className="upload-result" >{result}</pre>}
     </div>
   );
 }
