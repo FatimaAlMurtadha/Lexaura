@@ -6,8 +6,17 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
+	"os"
 	"strings"
 )
+
+func aiServiceBaseURL() string {
+	base := strings.TrimSpace(os.Getenv("AI_SERVICE_URL"))
+	if base == "" {
+		return "http://localhost:8001"
+	}
+	return strings.TrimRight(base, "/")
+}
 
 func SendToAIService(file io.Reader, filename string) (string, error) {
 	body := &bytes.Buffer{}
@@ -21,7 +30,7 @@ func SendToAIService(file io.Reader, filename string) (string, error) {
 	io.Copy(part, file)
 	writer.Close()
 
-	req, err := http.NewRequest("POST", "http://localhost:8000/api/ingest", body)
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/api/ingest", aiServiceBaseURL()), body)
 	if err != nil {
 		return "", err
 	}
@@ -42,7 +51,7 @@ func SendToAIService(file io.Reader, filename string) (string, error) {
 func SendQueryToAIService(question string) (string, error) {
 	payload := strings.NewReader(fmt.Sprintf(`{"question":"%s"}`, question))
 
-	req, err := http.NewRequest("POST", "http://localhost:8000/api/query", payload)
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/api/query", aiServiceBaseURL()), payload)
 
 	if err != nil {
 		return "", err
